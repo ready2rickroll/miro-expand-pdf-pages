@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Miro PDF Copier</title>
-  <script src="https://sdk.miro.com/1.0.0/miro.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+  <title>Miro Red Star App</title>
+  <script src="https://unpkg.com/@mirohq/websdk"></script>
 </head>
 <body>
   <script>
-   const shape = await miro.board.createShape({
-  content: "<p>⭐️</p>",
-  shape: "star",
-  style: {
-    fillColor: "#FF0000", // Красный цвет
-  },
-  x: 3000,
-  y: 4500,
-  width: 280,
-  height: 280,
-});
+    async function addRedStar() {
+      await miro.board.createShape({
+        content: "<p>⭐️</p>",
+        shape: "star",
+        style: {
+          fillColor: "#FF0000", // Красный цвет
+        },
+        x: 0,
+        y: 0,
+        width: 280,
+        height: 280,
+      });
+    }
+
+    miro.onReady(() => {
+      miro.initialize({
+        extensionPoints: {
+          toolbar: {
+            title: 'Add Red Star',
+            svgIcon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.82 8.63 12 2 9.18 8.63 2 9.24 7.46 13.97 5.82 21z"/></svg>',
+            toolbarSvgIcon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.82 8.63 12 2 9.18 8.63 2 9.24 7.46 13.97 5.82 21z"/></svg>',
+            onClick: addRedStar
+          }
+        }
+      });
+    });
   </script>
 </body>
 </html>
